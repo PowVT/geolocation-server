@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Server</title>
+</head>
+<script >
+    if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition( async position => {
+            console.log("location available: ", position.coords)
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            
+            document.getElementById('latitude').textContent = lat;
+            document.getElementById('longitude').textContent = lon;
+
+            const data = { lat, lon }
+            console.log(JSON.stringify(data))
+
+            const options = {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(data)
+            }
+
+            const response = await fetch('/api', options) // using await here because 'getCurrentPostion' function can be async.
+            const answer = await response.json();
+            console.log(answer)
+        })
+    }
+    else{
+        console.log("unavailable")
+    }
+
+</script>
+
+<body>
+    <h1 >Geolocation</h1>
+    <div >Latitude: <span id="latitude"></span>&deg;</div>
+    <div >Longitude: <span id="longitude"></span>&deg;</div>
+</body>
+
+</html>
