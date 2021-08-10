@@ -29,7 +29,7 @@
 
             const response = await fetch('/api', options) // using await here because 'getCurrentPostion' function can be async.
             const answer = await response.json();
-            console.log(answer)
+            console.log(answer.status)
         })
     }
     else{
