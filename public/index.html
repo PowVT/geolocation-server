@@ -4,8 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Server</title>
+    <title>Geolocation Server</title>
 </head>
+
 <script >
     if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition( async position => {
@@ -27,7 +28,7 @@
                 body:JSON.stringify(data)
             }
 
-            const response = await fetch('/api', options) // using await here because 'getCurrentPostion' function can be async.
+            const response = await fetch('/api', options) // using await here because 'getCurrentPosition' function can be async.
             const answer = await response.json();
             console.log(answer.status)
         })
